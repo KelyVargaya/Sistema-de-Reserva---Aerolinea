@@ -1,13 +1,94 @@
+class pasajero {
 
-//Funcion para Limpiar los Imput
-/*function limpiar(){
-   document.getElementById("nombre").value="";
-   document.getElementById("apellido").value="";
-   document.getElementById("dni").value="";
-   
-}*/
+    constructor(nombre, apellido, dni, asiento) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.asiento = asiento;
+    }
 
-var celdas = document.getElementsByTagName("td");
+    mostrar() {
+      let resultado = document.getElementById("resultado");
+      resultado.innerHTML = "<center><H2>DATOS DEL PASAJERO REGISTRADO</H2><p><strong>Asiento Nro: </strong>" + this.asiento+"</p><p><strong>Nombre: </strong>"+this.nombre+ " </p><p><strong>Apellido: </strong>" +this.apellido+ "</p><p><strong>DNI: </strong>" + this.dni+ "</p></center><br>";
+    
+        return resultado;
+    }
+}
+
+
+    class reservar {
+
+    constructor() {
+        this.asientos = [];
+        this.aerolinea = undefined;
+        this.numAsiento = undefined;
+    }
+    reservar(pasajero) {
+        this.asientos.push(pasajero);
+
+        this.aerolinea.style.backgroundColor = "#f927a9";
+
+    }
+
+    mostrar(element) {
+        for (let i in this.asientos) {
+            let datos = this.asientos[i];
+            element.innerHTML += datos.mostrar();
+        }
+
+    }
+
+    seleccionar(celda) {
+
+        let numAsiento = celda.textContent;
+        let numero = numAsiento;
+
+        for (let i = 0; i < this.asientos.length; i++) {
+            let datos = this.asientos[i];
+            if (datos.asiento == numero) {
+                document.getElementById("nombre").value = datos.nombre;
+                document.getElementById("apellido").value = datos.apellido;
+                document.getElementById("dni").value = datos.dni;
+                document.getElementById("resultado").innerHTML = "";
+
+            }
+        }
+        this.aerolinea = celda;
+    }
+
+      limpiar() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("dni").value = "";
+        document.getElementById("resultado").innerHTML = "";
+    }
+
+}
+
+var celdas = document.getElementsByTagName('td');
+for (let i = 0; i < celdas.length; i++) {
+    celdas[i].onclick = function (event) {
+        reserva.seleccionar(event.target);
+    }
+}
+
+
+var reserva = new reservar();
+
+$("#btnReservar").click(function () {
+    let nombre = $("#nombre").val();
+    let apellido = $("#apellido").val();
+    let dni = $("#dni").val();
+    let asiento = (event.target.textContent);
+    reserva.reservar(new pasajero(nombre, apellido, dni, asiento));
+    alert("Asiento reservado");
+    reserva.limpiar();
+});
+
+
+
+
+/*var celdas = document.getElementsByTagName("td");
 var aerolinea = new Aerolinea (32) ;
 
 for(var i = 0; i < celdas.length; i++)
@@ -91,33 +172,4 @@ function Aerolinea (nroAsientos) {
        }
    }
 
-}
-
-
-/*
-class Pasajero {
-    constructor(nombre, apellido, dni, asiento) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.asiento = asiento;
-    }
-    listar() {
-        let resultado = "";
-        resultado += "Nro Asiento: " + this.asiento + "<br><hr>";
-        resultado += "Nombre: " + this.nombre + "<br>";
-        resultado += "Apellido: " + this.apellido + "<br>";
-        resultado += "DNI: " + this.dni + "<br>";
-    
-        return resultado;
-    }
-}
-
-class reservar {
-    constructor() {
-        this.asientos = [];
-    }
-
-    }
-
-*/
+}*/
