@@ -16,7 +16,7 @@ class pasajero {
 }
 
 
-    class reservar {
+class reservar {
 
     constructor() {
         this.asientos = [];
@@ -27,14 +27,6 @@ class pasajero {
         this.asientos.push(pasajero);
 
         this.aerolinea.style.backgroundColor = "#f927a9";
-
-    }
-
-    mostrar(element) {
-        for (let i in this.asientos) {
-            let datos = this.asientos[i];
-            element.innerHTML += datos.mostrar();
-        }
 
     }
 
